@@ -39,7 +39,7 @@ public class Topics extends ActionBarActivity {
                 Intent nextActivity = new Intent(Topics.this, TopicDetail.class);
                 nextActivity.putExtra("timestamp", new Date().toString());
                 String selectedFromList =(String) (topics_listview.getItemAtPosition(position));
-                nextActivity.putExtra("Topic", selectedFromList);
+                nextActivity.putExtra("topic", selectedFromList);
                 Log.i("Temp", selectedFromList);
                 startActivity(nextActivity);
             }

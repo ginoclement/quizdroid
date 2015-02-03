@@ -1,65 +1,35 @@
 package edu.washington.gclement.quizdroid;
 
-import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Quiz extends ActionBarActivity {
-    private int sel_col;
-    private int unsel_col;
-    private View current;
+    private Map<String, ArrayList<Question>> questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        Intent launchedMe = getIntent();
+        String topic = launchedMe.getStringExtra("topic");
+        questions = getQuestions();
 
-        sel_col = Color.rgb(0, 200,0);
-        unsel_col = Color.rgb(0, 150, 255);
-        current = null;
+        for(Question q :questions.get(topic)){
+            Intent quesActivity = new Intent(Quiz.this, AskQuestion.class);
+            quesActivity.putExtra("question", q);
+            startActivity(quesActivity);
+        }
 
-        final Button submit = (Button) findViewById(R.id.submit_btn);
-        submit.setClickable(false);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Submit answer
-                Log.i("quiz", "Submitting");
-            }
-        });
-        View.OnClickListener selectAnswer = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(current != null){
-                    current.setBackgroundColor(unsel_col);
-                }
-
-                v.setBackgroundColor(sel_col);
-                v.setBackgroundColor(sel_col);
-                submit.setClickable(true);
-                Log.i("quiz", "Selected " + v.toString());
-                current = v;
-
-            }
-        };
-        Button a1 = (Button) findViewById(R.id.answer_1);
-        a1.setOnClickListener(selectAnswer);
-
-        Button a2 = (Button) findViewById(R.id.answer_2);
-        a2.setOnClickListener(selectAnswer);
-
-        Button a3 = (Button) findViewById(R.id.answer_3);
-        a3.setOnClickListener(selectAnswer);
-
-        Button a4 = (Button) findViewById(R.id.answer_4);
-        a4.setOnClickListener(selectAnswer);
     }
 
 
@@ -83,5 +53,28 @@ public class Quiz extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private Map<String, ArrayList<Question>> getQuestions(){
+        Map<String, ArrayList<Question>> q = new HashMap<>();
+
+        //Math Questions
+        ArrayList<Question> temp = new ArrayList<Question>();
+        temp.add(new Question("What is 2 + 2", new String[]{"1", "2", "3", "4"}, 3));
+        temp.add(new Question("What is the square root of 144", new String[]{"8", "10", "12", "14"}, 2));
+        temp.add(new Question("What is the derivative of x", new String[]{"0", "1", "x", "2x"}, 1));
+        q.put("Math", temp);
+        //Physic Questions
+        temp = new ArrayList<Question>();
+        temp.add(new Question("What is m in the equation 'f=ma'?", new String[]{"Material", "Momentum", "Mass", "Friction"}, 2));
+        temp.add(new Question("What is the integration of distance?", new String[]{"Speed", "Velocity", "Acceleration", "Height"}, 1));
+        q.put("Physics", temp);
+
+        //Marvel Superheroes Questions
+        temp = new ArrayList<Question>();
+        String[] c = {"1", "2", "3", "4"};
+        temp.add(new Question("Who is not a Marvel Superhero", new String[]{"Iron Man", "Spider-Man", "Captain America", "Hellboy"}, 3));
+        q.put("Marvel Super Heroes", temp);
+        return q;
     }
 }

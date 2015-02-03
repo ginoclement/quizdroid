@@ -22,7 +22,7 @@ public class TopicDetail extends ActionBarActivity {
         // Get the Intent that opened this activity
         Intent launchedMe = getIntent();
         String timestamp = launchedMe.getStringExtra("timestamp");  // get data that was passed from first activity
-        topic = launchedMe.getStringExtra("Topic");
+        topic = launchedMe.getStringExtra("topic");
         TextView title = (TextView) findViewById(R.id.topic_title);
         title.setText(topic);
 
@@ -30,7 +30,7 @@ public class TopicDetail extends ActionBarActivity {
         description.setText(topic);
 
         TextView question_count = (TextView) findViewById(R.id.question_count);
-        question_count.setText(getString(R.string.num_questions, 3));
+        question_count.setText(getString(R.string.num_questions, getQuestionCount(topic)));
 
         Button btn_begin = (Button) findViewById(R.id.btn_begin);
         btn_begin.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +38,7 @@ public class TopicDetail extends ActionBarActivity {
             public void onClick(View v) {
                 Log.i("quiz", "Starting quiz " + topic);
                 Intent nextActivity = new Intent(TopicDetail.this, Quiz.class);
+                nextActivity.putExtra("topic", topic);
                 startActivity(nextActivity);
             }
         });
@@ -64,5 +65,17 @@ public class TopicDetail extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private int getQuestionCount(String topic){
+        switch(topic){
+            case "Math":
+                return 3;
+            case "Physics":
+                return 2;
+            case "Marvel Super Heroes":
+                return 1;
+        }
+        return 0;
     }
 }
