@@ -6,6 +6,5 @@
     <string name="title_activity_topic_detail">Topic Overview</string>
     <string name="num_questions">There are %1$d questions</string>
     <string name="title_activity_quiz">Quiz</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>
