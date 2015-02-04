@@ -10,7 +10,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="@string/submit"
         android:id="@+id/submit_btn"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -21,23 +21,27 @@
         android:clickable="false" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Question?"
+        android:text="@string/emptyString"
         android:id="@+id/question"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/submit_btn"
-        android:layout_alignEnd="@+id/submit_btn" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
 
     <RadioGroup
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/submit_btn"
-        android:id="@+id/choicesGroup" >
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:id="@+id/choicesGroup"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
+        android:layout_centerInParent="true">
 
         <RadioButton
             android:layout_width="fill_parent"

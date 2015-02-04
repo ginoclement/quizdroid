@@ -9,5 +9,10 @@
     <string name="title_activity_answer_summary">Answer Summary</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_question">Question</string>
+    <string name="your_answer">Your answer:</string>
+    <string name="correct_answer">Correct answer:</string>
+    <string name="correct_count_text">You have %1$d out of %2$d correct</string>
+    <string name="emptyString">unset</string>
+    <string name="submit">Submit</string>
 
 </resources>

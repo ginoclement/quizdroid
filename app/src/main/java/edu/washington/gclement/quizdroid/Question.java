@@ -1,7 +1,5 @@
 package edu.washington.gclement.quizdroid;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 /**
@@ -26,7 +24,15 @@ public class Question implements Serializable{
         return this.answers;
     }
 
-    public boolean isCorrect(CharSequence response) {
-        return answers[this.correct].equals(response);
+    public String getCorrectAnswer(){
+        return this.answers[this.correct];
+    }
+//    Compare the value of the choice instead of index
+//    public boolean isCorrect(CharSequence response) {
+//        return answers[this.correct].equals(response);
+//    }
+
+    public boolean isCorrect(int index){
+        return index == correct;
     }
 }

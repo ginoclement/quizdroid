@@ -1,7 +1,6 @@
 package edu.washington.gclement.quizdroid;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,51 +9,66 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 
 public class AskQuestion extends ActionBarActivity {
-    private int sel_col;
-    private int unsel_col;
-    private RadioButton current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
 
+        //Get data from parent activity
         Intent launchedMe = getIntent();
-        final Question q = (Question) launchedMe.getSerializableExtra("question");
-//        topic = launchedMe.getStringExtra("Topic");
+        final ArrayList<Question> questions = (ArrayList<Question>) launchedMe.getSerializableExtra("questions");
+        final int numQuestions = launchedMe.getIntExtra("numQuestions", 0);
+        final int numCorrect = launchedMe.getIntExtra("numCorrect", 0);
+        final String topic = launchedMe.getStringExtra("topic");
 
-        sel_col = Color.rgb(0, 200, 0);
-        unsel_col = Color.rgb(0, 150, 255);
-        current = null;
-        String[] choices = q.getAnswers();
-        Log.i("question", "Answers: " + Arrays.toString(choices));
+        //Get random question
+        Random rand = new Random();
+        final Question q = questions.remove(rand.nextInt(questions.size()));
+
+        final String[] choices = q.getAnswers();
+        Log.i("quiz", "Answers: " + Arrays.toString(choices));
 
         //Question
         TextView question = (TextView) findViewById(R.id.question);
-        Log.i("question", "Question: " + q.getQuestion());
+        Log.i("quiz", "Question: " + q.getQuestion());
         question.setText(q.getQuestion());
 
         //Submit button
-        final Button submit = (Button) findViewById(R.id.submit_btn);
-        submit.setClickable(false);
+        Button submit = (Button) findViewById(R.id.submit_btn);
+        submit.setVisibility(View.INVISIBLE);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Submit answer
                 Log.i("quiz", "Submitting");
-                boolean correct = q.isCorrect(current.getText());
 
-                Log.i("question", "Guess was " + correct);
+                //Check to see if answer was correct
+                RadioGroup rg = (RadioGroup) findViewById(R.id.choicesGroup);
+                View rb = rg.findViewById(rg.getCheckedRadioButtonId());
+                int index = rg.indexOfChild(rb);
+                boolean correct = q.isCorrect(index);
+                int tempNumCorrect = numCorrect + ((correct) ? 1 : 0);
+                Log.i("quiz", "Guess was " + correct);
 
                 //Starting answer summary for that question
                 Intent ansActivity = new Intent(AskQuestion.this, AnswerSummary.class);
-                ansActivity.putExtra("question", q);
+                ansActivity.putExtra("topic", topic);
+                ansActivity.putExtra("guess", choices[index]);
+                ansActivity.putExtra("numCorrect", tempNumCorrect);
+                ansActivity.putExtra("numQuestions", numQuestions);
+                ansActivity.putExtra("questions", questions);
+                ansActivity.putExtra("prevQuestion", q);
+
                 startActivity(ansActivity);
 
             }
@@ -64,16 +78,9 @@ public class AskQuestion extends ActionBarActivity {
         View.OnClickListener selectAnswer = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(current != null){
-//                    current.setBackgroundColor(unsel_col);
-                }
-
-//                v.setBackgroundColor(sel_col);
-//                v.setBackgroundColor(sel_col);
-                submit.setClickable(true);
-                Log.i("quiz", "Selected " + v.toString());
-                current = (RadioButton) v;
-
+                Log.i("quiz", "Selected " + ((RadioButton) v).getText());
+                Button submit = (Button) findViewById(R.id.submit_btn);
+                submit.setVisibility(View.VISIBLE);
             }
         };
 
@@ -93,6 +100,7 @@ public class AskQuestion extends ActionBarActivity {
         RadioButton a4 = (RadioButton) findViewById(R.id.choice4);
         a4.setOnClickListener(selectAnswer);
         a4.setText(choices[3]);
+
     }
 
 
@@ -118,3 +126,4 @@ public class AskQuestion extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+

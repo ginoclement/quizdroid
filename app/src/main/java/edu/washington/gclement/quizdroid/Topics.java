@@ -1,6 +1,5 @@
 package edu.washington.gclement.quizdroid;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,10 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Map;
-import java.util.TreeMap;
 
 
 public class Topics extends ActionBarActivity {
