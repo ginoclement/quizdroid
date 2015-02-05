@@ -50,6 +50,7 @@ public class TopicDetail extends ActionBarActivity {
                 nextActivity.putExtra("numQuestions", questions.size());
                 nextActivity.putExtra("topic", topic);
                 startActivity(nextActivity);
+                finish();
             }
         });
     }
