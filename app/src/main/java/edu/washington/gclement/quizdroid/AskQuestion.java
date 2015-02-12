@@ -46,33 +46,33 @@ public class AskQuestion extends ActionBarActivity {
 //        //Submit button
 //        Button submit = (Button) findViewById(R.id.submit_btn);
 //        submit.setVisibility(View.INVISIBLE);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Submit answer
-                Log.i("quiz", "Submitting");
-
-                //Check to see if answer was correct
-                RadioGroup rg = (RadioGroup) findViewById(R.id.choicesGroup);
-                View rb = rg.findViewById(rg.getCheckedRadioButtonId());
-                int index = rg.indexOfChild(rb);
-                boolean correct = q.isCorrect(index);
-                int tempNumCorrect = numCorrect + ((correct) ? 1 : 0);
-                Log.i("quiz", "Guess was " + correct);
-
-                //Starting answer summary for that question
-                Intent ansActivity = new Intent(AskQuestion.this, AnswerSummary.class);
-                ansActivity.putExtra("topic", topic);
-                ansActivity.putExtra("guess", choices[index]);
-                ansActivity.putExtra("numCorrect", tempNumCorrect);
-                ansActivity.putExtra("numQuestions", numQuestions);
-                ansActivity.putExtra("questions", questions);
-                ansActivity.putExtra("prevQuestion", q);
-
-                startActivity(ansActivity);
-
-            }
-        });
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Submit answer
+//                Log.i("quiz", "Submitting");
+//
+//                //Check to see if answer was correct
+//                RadioGroup rg = (RadioGroup) findViewById(R.id.choicesGroup);
+//                View rb = rg.findViewById(rg.getCheckedRadioButtonId());
+//                int index = rg.indexOfChild(rb);
+//                boolean correct = q.isCorrect(index);
+//                int tempNumCorrect = numCorrect + ((correct) ? 1 : 0);
+//                Log.i("quiz", "Guess was " + correct);
+//
+//                //Starting answer summary for that question
+//                Intent ansActivity = new Intent(AskQuestion.this, AnswerSummary.class);
+//                ansActivity.putExtra("topic", topic);
+//                ansActivity.putExtra("guess", choices[index]);
+//                ansActivity.putExtra("numCorrect", tempNumCorrect);
+//                ansActivity.putExtra("numQuestions", numQuestions);
+//                ansActivity.putExtra("questions", questions);
+//                ansActivity.putExtra("prevQuestion", q);
+//
+//                startActivity(ansActivity);
+//
+//            }
+//        });
 
 //        //Choices onclick listener
 //        View.OnClickListener selectAnswer = new View.OnClickListener() {

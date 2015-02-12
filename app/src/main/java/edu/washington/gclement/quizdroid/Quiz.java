@@ -1,5 +1,7 @@
 package edu.washington.gclement.quizdroid;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -34,10 +36,17 @@ public class Quiz extends ActionBarActivity {
         final String[] choices = q.getAnswers();
         Log.i("quiz", "Answers: " + Arrays.toString(choices));
 
-        //Question
-        TextView question = (TextView) findViewById(R.id.question);
-        Log.i("quiz", "Question: " + q.getQuestion());
-        question.setText(q.getQuestion());
+
+        FragmentManager fManager = getFragmentManager();
+
+        //Launch QuestionFragment
+        FragmentTransaction fTransaction = fManager.beginTransaction();
+        QuestionFragment questionFragment = QuestionFragment.newInstance(choices, q.getQuestion());
+
+        //Launch AnswerFragment
+        String yourAnswer = "Some answer";
+        AnswerFragment answerFragment = AnswerFragment.newInstance(yourAnswer, q.getCorrectAnswer(), numCorrect, numQuestions, questions.size() > 0);
+
     }
 
 
