@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/correct_answer"
-        android:id="@+id/correctAnswerLabel"
+        android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/your_answer"
-        android:id="@+id/yourAnswerLabel"
-        android:layout_below="@+id/correctAnswer"
+        android:id="@+id/textView"
+        android:layout_below="@+id/correctAnswerLabel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/emptyString"
-        android:id="@+id/correctAnswer"
+        android:id="@+id/textView"
         android:layout_below="@+id/correctAnswerLabel"
         android:layout_centerHorizontal="true" />
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/emptyString"
-        android:id="@+id/yourAnswer"
+        android:id="@+id/textView"
         android:layout_below="@+id/yourAnswerLabel"
         android:layout_centerHorizontal="true" />
 
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/emptyString"
-        android:id="@+id/correctCount"
+        android:id="@+id/textView"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -57,7 +57,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/emptyString"
-        android:id="@+id/moveOn_btn"
+        android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

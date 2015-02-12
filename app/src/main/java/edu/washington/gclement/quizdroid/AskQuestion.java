@@ -24,28 +24,28 @@ public class AskQuestion extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
 
-        //Get data from parent activity
-        Intent launchedMe = getIntent();
-        final ArrayList<Question> questions = (ArrayList<Question>) launchedMe.getSerializableExtra("questions");
-        final int numQuestions = launchedMe.getIntExtra("numQuestions", 0);
-        final int numCorrect = launchedMe.getIntExtra("numCorrect", 0);
-        final String topic = launchedMe.getStringExtra("topic");
+//        //Get data from parent activity
+//        Intent launchedMe = getIntent();
+//        final ArrayList<Question> questions = (ArrayList<Question>) launchedMe.getSerializableExtra("questions");
+//        final int numQuestions = launchedMe.getIntExtra("numQuestions", 0);
+//        final int numCorrect = launchedMe.getIntExtra("numCorrect", 0);
+//        final String topic = launchedMe.getStringExtra("topic");
+//
+//        //Get random question
+//        Random rand = new Random();
+//        final Question q = questions.remove(rand.nextInt(questions.size()));
+//
+//        final String[] choices = q.getAnswers();
+//        Log.i("quiz", "Answers: " + Arrays.toString(choices));
+//
+//        //Question
+//        TextView question = (TextView) findViewById(R.id.question);
+//        Log.i("quiz", "Question: " + q.getQuestion());
+//        question.setText(q.getQuestion());
 
-        //Get random question
-        Random rand = new Random();
-        final Question q = questions.remove(rand.nextInt(questions.size()));
-
-        final String[] choices = q.getAnswers();
-        Log.i("quiz", "Answers: " + Arrays.toString(choices));
-
-        //Question
-        TextView question = (TextView) findViewById(R.id.question);
-        Log.i("quiz", "Question: " + q.getQuestion());
-        question.setText(q.getQuestion());
-
-        //Submit button
-        Button submit = (Button) findViewById(R.id.submit_btn);
-        submit.setVisibility(View.INVISIBLE);
+//        //Submit button
+//        Button submit = (Button) findViewById(R.id.submit_btn);
+//        submit.setVisibility(View.INVISIBLE);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,32 +74,32 @@ public class AskQuestion extends ActionBarActivity {
             }
         });
 
-        //Choices onclick listener
-        View.OnClickListener selectAnswer = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("quiz", "Selected " + ((RadioButton) v).getText());
-                Button submit = (Button) findViewById(R.id.submit_btn);
-                submit.setVisibility(View.VISIBLE);
-            }
-        };
+//        //Choices onclick listener
+//        View.OnClickListener selectAnswer = new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i("quiz", "Selected " + ((RadioButton) v).getText());
+//                Button submit = (Button) findViewById(R.id.submit_btn);
+//                submit.setVisibility(View.VISIBLE);
+//            }
+//        };
 
-        //Buttons
-        RadioButton a1 = (RadioButton) findViewById(R.id.choice1);
-        a1.setText(choices[0]);
-        a1.setOnClickListener(selectAnswer);
-
-        RadioButton a2 = (RadioButton) findViewById(R.id.choice2);
-        a2.setOnClickListener(selectAnswer);
-        a2.setText(choices[1]);
-
-        RadioButton a3 = (RadioButton) findViewById(R.id.choice3);
-        a3.setOnClickListener(selectAnswer);
-        a3.setText(choices[2]);
-
-        RadioButton a4 = (RadioButton) findViewById(R.id.choice4);
-        a4.setOnClickListener(selectAnswer);
-        a4.setText(choices[3]);
+//        //Buttons
+//        RadioButton a1 = (RadioButton) findViewById(R.id.choice1);
+//        a1.setText(choices[0]);
+//        a1.setOnClickListener(selectAnswer);
+//
+//        RadioButton a2 = (RadioButton) findViewById(R.id.choice2);
+//        a2.setOnClickListener(selectAnswer);
+//        a2.setText(choices[1]);
+//
+//        RadioButton a3 = (RadioButton) findViewById(R.id.choice3);
+//        a3.setOnClickListener(selectAnswer);
+//        a3.setText(choices[2]);
+//
+//        RadioButton a4 = (RadioButton) findViewById(R.id.choice4);
+//        a4.setOnClickListener(selectAnswer);
+//        a4.setText(choices[3]);
 
     }
 

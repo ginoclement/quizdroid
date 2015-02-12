@@ -29,37 +29,37 @@ public class AnswerSummary extends ActionBarActivity {
         final Question prevQuestion = (Question) launchedMe.getSerializableExtra("prevQuestion");
         final String guess = launchedMe.getStringExtra("guess");
 
-        TextView correctAnswer = (TextView) findViewById(R.id.correctAnswer);
-        correctAnswer.setText(prevQuestion.getCorrectAnswer());
-
-        TextView yourAnswer = (TextView) findViewById(R.id.yourAnswer);
-        yourAnswer.setText(guess);
-
-        TextView correctCount = (TextView) findViewById(R.id.correctCount);
-        correctCount.setText(getString(R.string.correct_count_text, numCorrect, numQuestions));
-
-        Button next_btn = (Button) findViewById(R.id.moveOn_btn);
-        Log.i("quiz", "Questions left: " + questions.size());
-        final boolean moreQuestions = (questions.size() > 0);
-        next_btn.setText((moreQuestions) ? "Next" : "Finish");
-        next_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("quiz", "More questions: " + moreQuestions);
-                if (moreQuestions){
-                    Intent nextQuestion = new Intent(AnswerSummary.this, AskQuestion.class);
-                    nextQuestion.putExtra("questions", questions);
-                    nextQuestion.putExtra("numCorrect", numCorrect);
-                    nextQuestion.putExtra("numQuestions", numQuestions);
-                    nextQuestion.putExtra("topic", topic);
-                    startActivity(nextQuestion);
-                } else {
-                    Intent topic = new Intent(AnswerSummary.this, Topics.class);
-                    startActivity(topic);
-                }
-                finish();
-            }
-        });
+//        TextView correctAnswer = (TextView) findViewById(R.id.correctAnswerLabel);
+//        correctAnswer.setText(prevQuestion.getCorrectAnswer());
+//
+//        TextView yourAnswer = (TextView) findViewById(R.id.yourAnswer);
+//        yourAnswer.setText(guess);
+//
+//        TextView correctCount = (TextView) findViewById(R.id.correctCount);
+//        correctCount.setText(getString(R.string.correct_count_text, numCorrect, numQuestions));
+//
+//        Button next_btn = (Button) findViewById(R.id.moveOn_btn);
+//        Log.i("quiz", "Questions left: " + questions.size());
+//        final boolean moreQuestions = (questions.size() > 0);
+//        next_btn.setText((moreQuestions) ? "Next" : "Finish");
+//        next_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i("quiz", "More questions: " + moreQuestions);
+//                if (moreQuestions){
+//                    Intent nextQuestion = new Intent(AnswerSummary.this, AskQuestion.class);
+//                    nextQuestion.putExtra("questions", questions);
+//                    nextQuestion.putExtra("numCorrect", numCorrect);
+//                    nextQuestion.putExtra("numQuestions", numQuestions);
+//                    nextQuestion.putExtra("topic", topic);
+//                    startActivity(nextQuestion);
+//                } else {
+//                    Intent topic = new Intent(AnswerSummary.this, Topics.class);
+//                    startActivity(topic);
+//                }
+//                finish();
+//            }
+//        });
 
     }
 

@@ -41,7 +41,8 @@ public class TopicDetail extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Log.i("quiz", "Starting quiz " + topic);
-                Intent nextActivity = new Intent(TopicDetail.this, AskQuestion.class);
+//                Intent nextActivity = new Intent(TopicDetail.this, AskQuestion.class);
+                Intent nextActivity = new Intent(TopicDetail.this, Quiz.class);
 
                 //Gather quiz questions
                 ArrayList<Question> questions = getQuestionsForTopic(topic);
