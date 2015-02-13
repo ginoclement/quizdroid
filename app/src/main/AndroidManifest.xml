@@ -24,14 +24,6 @@
             android:name=".Quiz"
             android:label="@string/title_activity_quiz" >
         </activity>
-        <activity
-            android:name=".AnswerSummary"
-            android:label="@string/title_activity_answer_summary" >
-        </activity>
-        <activity
-            android:name=".AskQuestion"
-            android:label="@string/title_activity_question" >
-        </activity>
     </application>
 
 </manifest>

@@ -10,7 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.util.Arrays;
 
 
 /**
@@ -22,32 +25,24 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class QuestionFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "question";
 
-    // TODO: Rename and change types of parameters
-    private String question;
-    private String[] choices;
+    private Question question;
+    private Quiz quizActivity;
 
-    private OnFragmentInteractionListener mListener;
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
      * @param question Question to be asked.
-     * @param choices Array of answer choices.
      * @return A new instance of fragment QuestionFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static QuestionFragment newInstance(String[] choices, String question) {
+    public static QuestionFragment newInstance(Question question) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
-        args.putStringArray(ARG_PARAM1, choices);
-        args.putString(ARG_PARAM2, question);
+        args.putSerializable(ARG_PARAM1, question);
         fragment.setArguments(args);
+        Log.i("quiz", "Question: " + question.getQuestion());
+        Log.i("quiz", "Answers: " + Arrays.toString(question.getAnswers()));
         return fragment;
     }
 
@@ -59,98 +54,74 @@ public class QuestionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            question = getArguments().getString(ARG_PARAM1);
-            choices = getArguments().getStringArray(ARG_PARAM2);
+            question = (Question) getArguments().getSerializable(ARG_PARAM1);
         }
+    }
 
-        final View self = this.getView();
-
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         //Set question text
-        TextView questionTextView = (TextView) self.findViewById(R.id.question);
-        questionTextView.setText(question);
+        final View view = inflater.inflate(R.layout.fragment_question, container, false);
+
+        TextView questionTextView = (TextView) view.findViewById(R.id.question);
+        questionTextView.setText(question.getQuestion());
+
+        String[] choices = question.getAnswers();
+
+        //Submit button
+        Button submit = (Button) view.findViewById(R.id.btn_submit);
+        submit.setVisibility(View.INVISIBLE);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Check to see if answer was correct
+                RadioGroup rg = (RadioGroup) view.findViewById(R.id.choicesGroup);
+                View rb = rg.findViewById(rg.getCheckedRadioButtonId());
+                quizActivity.showAnswer(rg.indexOfChild(rb));
+            }
+        });
 
         //Choices onclick listener
         View.OnClickListener selectAnswer = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("quiz", "Selected " + ((RadioButton) v).getText());
-                Button submit = (Button) self.findViewById(R.id.submit_btn);
+                Button submit = (Button) view.findViewById(R.id.btn_submit);
                 submit.setVisibility(View.VISIBLE);
             }
         };
 
         //Buttons
-        RadioButton a1 = (RadioButton) self.findViewById(R.id.choice1);
+        RadioButton a1 = (RadioButton) view.findViewById(R.id.choice1);
         a1.setText(choices[0]);
         a1.setOnClickListener(selectAnswer);
 
-        RadioButton a2 = (RadioButton) self.findViewById(R.id.choice2);
+        RadioButton a2 = (RadioButton) view.findViewById(R.id.choice2);
         a2.setOnClickListener(selectAnswer);
         a2.setText(choices[1]);
 
-        RadioButton a3 = (RadioButton) self.findViewById(R.id.choice3);
+        RadioButton a3 = (RadioButton) view.findViewById(R.id.choice3);
         a3.setOnClickListener(selectAnswer);
         a3.setText(choices[2]);
 
-        RadioButton a4 = (RadioButton) self.findViewById(R.id.choice4);
+        RadioButton a4 = (RadioButton) view.findViewById(R.id.choice4);
         a4.setOnClickListener(selectAnswer);
         a4.setText(choices[3]);
 
-        //Submit button
-        Button submit = (Button) self.findViewById(R.id.submit_btn);
-        submit.setVisibility(View.INVISIBLE);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Do something!
-            }
-        });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_question, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        return view;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+        quizActivity = (Quiz) activity;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
 
 }
