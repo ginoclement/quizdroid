@@ -46,8 +46,11 @@ public class Quiz extends ActionBarActivity {
 
         //Launch QuestionFragment
         FragmentTransaction fTransaction = fManager.beginTransaction();
+        fTransaction.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_left);
         QuestionFragment questionFragment = QuestionFragment.newInstance(currentQuestion);
         fTransaction.replace(R.id.quizFrame, questionFragment);
+        fTransaction.setCustomAnimations(android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
         fTransaction.commit();
     }
 
@@ -56,6 +59,7 @@ public class Quiz extends ActionBarActivity {
             numCorrect++;
         }
         FragmentTransaction fTransaction = fManager.beginTransaction();
+        fTransaction.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_left);
         AnswerFragment answerFragment = AnswerFragment.newInstance(currentQuestion.getAnswers()[guess], currentQuestion.getCorrectAnswer(), numCorrect, numQuestions, !questionList.isEmpty());
         fTransaction.replace(R.id.quizFrame, answerFragment);
         fTransaction.commit();
