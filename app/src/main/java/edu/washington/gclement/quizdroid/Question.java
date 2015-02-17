@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 /**
  * Created by ginoclement on 2/3/15.
+ * Quiz is question text, four answers, and an integer saying which of the four answers is correct
+ *
+ * I decided to rename this to Question instead of Quiz because it makes more sense.
  */
 public class Question implements Serializable{
     private int correct;
@@ -24,15 +27,7 @@ public class Question implements Serializable{
         return this.answers;
     }
 
-    public String getCorrectAnswer(){
-        return this.answers[this.correct];
-    }
-//    Compare the value of the choice instead of index
-//    public boolean isCorrect(CharSequence response) {
-//        return answers[this.correct].equals(response);
-//    }
-
-    public boolean isCorrect(int index){
-        return index == correct;
+    public int getCorrectAnswer(){
+        return this.correct;
     }
 }

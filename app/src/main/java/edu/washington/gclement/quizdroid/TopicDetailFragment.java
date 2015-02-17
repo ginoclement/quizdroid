@@ -12,22 +12,11 @@ import android.widget.TextView;
 
 import java.util.zip.Inflater;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TopicDetailFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TopicDetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TopicDetailFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "topic";
-    private static final String ARG_PARAM2 = "numQuestions";
 
-    private String topic;
-    private int numQuestions;
+    private Topic topic;
     private Quiz quizActivity;
 
     /**
@@ -35,11 +24,10 @@ public class TopicDetailFragment extends Fragment {
      * @return A new instance of fragment TopicDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TopicDetailFragment newInstance(String topic, int numQuestions) {
+    public static TopicDetailFragment newInstance(Topic topic) {
         TopicDetailFragment fragment = new TopicDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, topic);
-        args.putInt(ARG_PARAM2, numQuestions);
+        args.putSerializable(ARG_PARAM1, topic);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,8 +40,7 @@ public class TopicDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            topic = getArguments().getString(ARG_PARAM1);
-            numQuestions = getArguments().getInt(ARG_PARAM2);
+            topic = (Topic) getArguments().getSerializable(ARG_PARAM1);
         }
     }
 
@@ -64,13 +51,13 @@ public class TopicDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_topic_detail, container, false);
 
         TextView title = (TextView) view.findViewById(R.id.topic_title);
-        title.setText(topic);
+        title.setText(topic.getName());
 
         TextView desc = (TextView) view.findViewById(R.id.topic_description);
-        desc.setText(getTopicDetail(topic));
+        desc.setText(topic.getLongDesc());
 
         TextView qCount = (TextView) view.findViewById(R.id.question_count);
-        qCount.setText(getString(R.string.num_questions, numQuestions));
+        qCount.setText(getString(R.string.num_questions, topic.getNumQuestions()));
 
 
         Button begin = (Button) view.findViewById(R.id.btn_begin);
@@ -94,17 +81,5 @@ public class TopicDetailFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    private String getTopicDetail(String topic){
-        switch (topic){
-            case "Math":
-                return "Really? You need a description for what math is?";
-            case "Physics":
-                return "Basically questions about physics. What else would a section called physics be about...";
-            case "Marvel Super Heroes":
-                return "You're either a nerd, or you're going to fail.";
-        }
-        return "Apparently this topic doesn't have a description...";
     }
 }

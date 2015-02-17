@@ -13,29 +13,36 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 
 public class Topics extends ActionBarActivity {
-//    private Map<String, String> topics_list = new TreeMap<String, String>();
-    private ArrayList<String> topics_list = new ArrayList<String>();
+    private Map<String, Topic> topics;
+    private ArrayList<String> topics_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics);
+        topics_list = new ArrayList<String>();
         ArrayAdapter<String> topics_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, topics_list);
-        topics_list.add("Math");
-        topics_list.add("Physics");
-        topics_list.add("Marvel Super Heroes");
+
+        QuizApp app = (QuizApp) getApplication();
+        topics = app.getTopicRepo().getTopics();
+
+        for(String topic : topics.keySet()){
+            topics_adapter.add(topic);
+        }
+
         final ListView topics_listview = (ListView) findViewById(R.id.topics_list);
         topics_listview.setAdapter(topics_adapter);
         topics_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent nextActivity = new Intent(Topics.this, Quiz.class);
-                String selectedFromList =(String) (topics_listview.getItemAtPosition(position));
-                nextActivity.putExtra("topic", selectedFromList);
-                Log.i("Temp", selectedFromList);
+                Topic topic = topics.get((String) (topics_listview.getItemAtPosition(position)));
+                nextActivity.putExtra("Topic", topic);
+                Log.i("QuizApp", "Selected topic: " + topic.getName());
                 startActivity(nextActivity);
             }
         });
