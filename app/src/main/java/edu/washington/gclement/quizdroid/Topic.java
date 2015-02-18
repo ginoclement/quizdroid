@@ -1,5 +1,8 @@
 package edu.washington.gclement.quizdroid;
 
+import android.media.Image;
+import android.widget.ImageView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,12 +15,19 @@ public class Topic implements Serializable {
     private String shortDesc;
     private String longDesc;
     private ArrayList<Question> questions;
+    private Image image;
 
     public Topic(String name, String shortDesc, String longDesc, ArrayList<Question> questions){
         this.name = name;
         this.shortDesc = shortDesc;
         this.longDesc = longDesc;
         this.questions = questions;
+
+    }
+
+    public Topic(String name, String shortDesc, String longDesc, ArrayList<Question> questions, Image image){
+        this(name, shortDesc, longDesc, questions);
+        this.image = image;
     }
 
     public String getName(){
