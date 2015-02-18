@@ -52,7 +52,7 @@ public class TopicsListAdapter extends ArrayAdapter<Topic> {
         Topic topic = data.get(position);
         holder.topicName.setText(topic.getName());
         holder.topicDesc.setText(topic.getShortDesc());
-        holder.topicImage.setImageResource(R.drawable.ic_launcher);
+        holder.topicImage.setImageResource(topic.getImageResource());
 
         return row;
     }

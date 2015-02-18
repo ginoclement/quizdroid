@@ -1,16 +1,14 @@
 package edu.washington.gclement.quizdroid;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.zip.Inflater;
 
 public class TopicDetailFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +57,8 @@ public class TopicDetailFragment extends Fragment {
         TextView qCount = (TextView) view.findViewById(R.id.question_count);
         qCount.setText(getString(R.string.num_questions, topic.getNumQuestions()));
 
+        ImageView image = (ImageView) view.findViewById(R.id.topic_details_image);
+        image.setImageResource(topic.getImageResource());
 
         Button begin = (Button) view.findViewById(R.id.btn_begin);
         begin.setOnClickListener(new View.OnClickListener() {

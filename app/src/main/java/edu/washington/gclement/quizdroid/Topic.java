@@ -15,19 +15,19 @@ public class Topic implements Serializable {
     private String shortDesc;
     private String longDesc;
     private ArrayList<Question> questions;
-    private Image image;
+    private int imageResource;
 
     public Topic(String name, String shortDesc, String longDesc, ArrayList<Question> questions){
         this.name = name;
         this.shortDesc = shortDesc;
         this.longDesc = longDesc;
         this.questions = questions;
-
+        this.imageResource = R.drawable.ic_launcher;
     }
 
-    public Topic(String name, String shortDesc, String longDesc, ArrayList<Question> questions, Image image){
+    public Topic(String name, String shortDesc, String longDesc, ArrayList<Question> questions, int imageResource){
         this(name, shortDesc, longDesc, questions);
-        this.image = image;
+        this.imageResource = imageResource;
     }
 
     public String getName(){
@@ -48,5 +48,9 @@ public class Topic implements Serializable {
 
     public int getNumQuestions(){
         return questions.size();
+    }
+
+    public int getImageResource(){
+        return this.imageResource;
     }
 }
