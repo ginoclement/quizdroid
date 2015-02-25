@@ -3,6 +3,8 @@ package edu.washington.gclement.quizdroid;
 import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -41,4 +43,5 @@ public class QuizApp extends Application{
     public TopicRepository getTopicRepo(){
         return this.topicRepo;
     }
+
 }

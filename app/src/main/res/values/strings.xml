@@ -15,5 +15,6 @@
     <string name="emptyString">unset</string>
     <string name="submit">Submit</string>
     <string name="begin">Begin</string>
+    <string name="preferenceTitle">Preferences</string>
 
 </resources>

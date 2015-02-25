@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -62,6 +64,14 @@ public class Quiz extends ActionBarActivity {
         AnswerFragment answerFragment = AnswerFragment.newInstance(choices[guess], choices[currentQuestion.getCorrectAnswer()], numCorrect, topic.getNumQuestions(), !questionList.isEmpty());
         fTransaction.replace(R.id.quizFrame, answerFragment);
         fTransaction.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
 }
