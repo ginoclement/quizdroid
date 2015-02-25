@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import java.util.List;
@@ -66,9 +67,10 @@ public class PreferencesActivity
         Log.i("QuizApp", "Shared Preference Changed. Key: " + key);
         if(key.equals("prefUpdateURL")){
             Log.i("QuizApp", "Changing update interval");
-//            Intent service = new Intent(PreferencesActivity.this, DownloadQuestionsIntentService.class);
-//            startService(service);
-
+            Log.i("QuizApp", "Preferences Activity: " + getApplicationContext());
+            Toast.makeText(getApplicationContext(), "ARGGGG", Toast.LENGTH_SHORT).show();
+            Intent service = new Intent(PreferencesActivity.this, QuestionDownloadIntentService.class);
+            startService(service);
         }
     }
 

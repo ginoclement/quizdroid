@@ -6,7 +6,8 @@
             android:title="Update URL"
             android:summary="URL to pull questions from"
             android:key="prefUpdateURL"
-            android:inputType="textUri"/>
+            android:inputType="textUri"
+            android:defaultValue="http://ginoclement.com"/>
         <EditTextPreference
             android:title="Update Interval"
             android:summary="How often to update questions"
