@@ -27,7 +27,7 @@
             android:name=".PreferencesActivity"
             android:label="@string/title_activity_preferences" >
         </activity>
-        <service android:name=".QuestionDownloadIntentService" />
+        <service android:name=".QuestionDownloadService" />
     </application>
 
 </manifest>
