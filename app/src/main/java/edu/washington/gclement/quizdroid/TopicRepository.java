@@ -1,5 +1,12 @@
 package edu.washington.gclement.quizdroid;
 
+import android.util.JsonReader;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +28,13 @@ public class TopicRepository {
     }
 
     private Map<String, Topic> generateTopics(){
+//        try {
+//            File file = new File("/questions.json");
+//            Reader fileReader = new FileReader(file);
+//            JsonReader jsonReader = new JsonReader(fileReader);
+//        } catch (FileNotFoundException e){
+//            Log.i("QuizApp", "Looks like it can't find the questions file...");
+//        }
         Map<String, Topic> topics = new HashMap<String, Topic>();
 
         String name = "";
@@ -58,5 +72,6 @@ public class TopicRepository {
         topics.put(name, topic);
 
         return topics;
+
     }
 }
