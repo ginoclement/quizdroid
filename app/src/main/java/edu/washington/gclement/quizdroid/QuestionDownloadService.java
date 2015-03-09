@@ -33,21 +33,6 @@ public class QuestionDownloadService extends IntentService {
         super(TAG);
     }
 
-//    public void onCreate(){
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//        url = prefs.getString("prefUpdateURL", "No URL?");
-//        interval = Integer.parseInt(prefs.getString("prefUpdateInterval", "Hmm..."));
-//        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                Log.i("QuizApp", "Something happened... " + intent.getAction());
-//                if(intent.getAction().equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)){
-//                    Log.i("QuizApp", "THE DOWNLOAD WORKED!!!!");
-//                }
-//            }
-//        };
-//    }
-
     @Override
     public void onHandleIntent(Intent intent){
 //        Toast.makeText(getApplicationContext(), url, Toast.LENGTH_SHORT).show();

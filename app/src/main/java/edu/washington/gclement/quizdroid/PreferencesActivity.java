@@ -67,7 +67,6 @@ public class PreferencesActivity
         Log.i("QuizApp", "Shared Preference Changed. Key: " + key);
         if(key.equals("prefUpdateURL")){
             Log.i("QuizApp", "Changing update interval");
-//            Toast.makeText(getApplicationContext(), sharedPreferences.getString("prefUpdateURL", "No URL?"), Toast.LENGTH_SHORT).show();
 
             Intent service = new Intent(PreferencesActivity.this, QuestionDownloadService.class);
             startService(service);

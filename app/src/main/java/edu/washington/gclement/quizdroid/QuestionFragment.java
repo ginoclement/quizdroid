@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class QuestionFragment extends Fragment {
@@ -33,7 +34,7 @@ public class QuestionFragment extends Fragment {
         args.putSerializable(ARG_PARAM1, question);
         fragment.setArguments(args);
         Log.i("quiz", "Question: " + question.getQuestion());
-        Log.i("quiz", "Answers: " + Arrays.toString(question.getAnswers()));
+//        Log.i("quiz", "Answers: " + Arrays.toString(question.getAnswers()));
         return fragment;
     }
 
@@ -58,7 +59,8 @@ public class QuestionFragment extends Fragment {
         TextView questionTextView = (TextView) view.findViewById(R.id.question);
         questionTextView.setText(question.getQuestion());
 
-        String[] choices = question.getAnswers();
+//        String[] choices = question.getAnswers();
+        ArrayList<String> choices = question.getAnswers();
 
         //Submit button
         Button submit = (Button) view.findViewById(R.id.btn_submit);
@@ -73,6 +75,7 @@ public class QuestionFragment extends Fragment {
             }
         });
 
+
         //Choices onclick listener
         View.OnClickListener selectAnswer = new View.OnClickListener() {
             @Override
@@ -85,20 +88,20 @@ public class QuestionFragment extends Fragment {
 
         //Buttons
         RadioButton a1 = (RadioButton) view.findViewById(R.id.choice1);
-        a1.setText(choices[0]);
+        a1.setText(choices.get(0));
         a1.setOnClickListener(selectAnswer);
 
         RadioButton a2 = (RadioButton) view.findViewById(R.id.choice2);
         a2.setOnClickListener(selectAnswer);
-        a2.setText(choices[1]);
+        a2.setText(choices.get(1));
 
         RadioButton a3 = (RadioButton) view.findViewById(R.id.choice3);
         a3.setOnClickListener(selectAnswer);
-        a3.setText(choices[2]);
+        a3.setText(choices.get(2));
 
         RadioButton a4 = (RadioButton) view.findViewById(R.id.choice4);
         a4.setOnClickListener(selectAnswer);
-        a4.setText(choices[3]);
+        a4.setText(choices.get(3));
 
         return view;
     }

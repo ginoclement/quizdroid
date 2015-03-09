@@ -18,17 +18,17 @@ import java.util.Map;
 
 public class TopicsList extends ActionBarActivity {
     private Map<String, Topic> topics;
-    private ArrayList<Topic> topics_list;
+//    private ArrayList<Topic> topics_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics_list);
         QuizApp app = (QuizApp) getApplication();
-        topics = app.getTopicRepo().getTopics();
-        topics_list = new ArrayList<>(topics.values());
-        TopicsListAdapter topics_adapter = new TopicsListAdapter(this, R.layout.topics_list_row, topics_list);
-        Log.i("QuizApp", "Topics: " + topics_list.toString());
+//        topics = app.getTopics();
+//        topics_list = new ArrayList<>(topics.values());
+        TopicsListAdapter topics_adapter = new TopicsListAdapter(this, R.layout.topics_list_row, app.getTopics());
+//        Log.i("QuizApp", "Topics: " + topics_list.toString());
 
         final ListView topics_listview = (ListView) findViewById(R.id.topics_list);
         topics_listview.setAdapter(topics_adapter);

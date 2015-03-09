@@ -60,8 +60,8 @@ public class Quiz extends ActionBarActivity {
         }
         FragmentTransaction fTransaction = fManager.beginTransaction();
         fTransaction.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_left);
-        String[] choices = currentQuestion.getAnswers();
-        AnswerFragment answerFragment = AnswerFragment.newInstance(choices[guess], choices[currentQuestion.getCorrectAnswer()], numCorrect, topic.getNumQuestions(), !questionList.isEmpty());
+        ArrayList<String> choices= currentQuestion.getAnswers();
+        AnswerFragment answerFragment = AnswerFragment.newInstance(choices.get(guess), choices.get(currentQuestion.getCorrectAnswer()), numCorrect, topic.getNumQuestions(), !questionList.isEmpty());
         fTransaction.replace(R.id.quizFrame, answerFragment);
         fTransaction.commit();
     }

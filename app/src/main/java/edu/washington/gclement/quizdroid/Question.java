@@ -1,6 +1,7 @@
 package edu.washington.gclement.quizdroid;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by ginoclement on 2/3/15.
@@ -11,9 +12,9 @@ import java.io.Serializable;
 public class Question implements Serializable{
     private int correct;
     private String question;
-    private String[] answers;
+    private ArrayList<String> answers;
 
-    public Question(String question, String[] answers, int correct) {
+    public Question(String question, ArrayList<String> answers, int correct) {
         this.correct = correct;
         this.question = question;
         this.answers = answers;
@@ -23,7 +24,7 @@ public class Question implements Serializable{
         return this.question;
     }
 
-    public String[] getAnswers(){
+    public ArrayList<String> getAnswers(){
         return this.answers;
     }
 
